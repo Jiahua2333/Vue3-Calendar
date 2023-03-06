@@ -3,4 +3,8 @@ export default {
     placeholder:'',
     maxLength:"8",
     field:'day',
+    errorCode:0,
+    dayData:{},
+    monthData:[],
+    yearData:[],
 }

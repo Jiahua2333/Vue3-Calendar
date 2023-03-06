@@ -57,4 +57,21 @@ export default {
     setField(state, routerName){
         state.field = routerName;
     },
+    setErrorCode(state, errorCode){
+        state.errorCode = errorCode;
+    },
+    setData(state, playload){
+        const {field, data} = playload;
+        switch(field){
+            case 'day':
+                state.dayData = data;
+                break;
+            case 'month':
+                state.monthData = data;
+                break;
+            case 'year':
+                state.yearData = data;
+                break;
+        }
+    },
 }

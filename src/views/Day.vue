@@ -1,11 +1,35 @@
 <template>
     <div class="container">
-        Day page
+        <DayCard :data="dayData"></DayCard>
+        <List :data="dayData"></List>
     </div>
 </template>
 
-<script setup>
+<script>
+import { onMounted, computed } from 'vue';
+import getData from "@/services"
+import DayCard from "@/components/DayPage/Card.vue"
+import List from "@/components/DayPage/List.vue"
+import { getCurDate } from "@/utils/utils"
+import { useStore } from 'vuex';
 
+export default{
+    setup(){
+        const store = useStore();
+        onMounted(() => {
+            const field = store.state.field;
+            getData(store, field, getCurDate(field));
+        })
+
+        return {
+            dayData:computed(() => store.state.dayData),
+        }
+    },
+    components:{
+        DayCard,
+        List,
+    }
+}
 </script>
 
 <style lang="less" scoped>
