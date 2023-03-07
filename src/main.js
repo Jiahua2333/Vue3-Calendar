@@ -7,4 +7,10 @@ import '@/assets/css/resets.css'
 import '@/assets/css/border.css'
 import '@/assets/js/common.js'
 
-createApp(App).use(store).use(router).mount('#app')
+import ErrorTip from "@/components/ErrorTip";
+
+const app = createApp(App);
+
+app.component("ErrorTip", ErrorTip);
+
+app.use(store).use(router).mount('#app')

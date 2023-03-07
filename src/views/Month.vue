@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <CardList :data="monthData"></CardList>
+        <error-tip :errorCode="errorCode" v-if="errorCode"></error-tip>
+        <CardList :data="monthData" v-else></CardList>
     </div>
 </template>
 
@@ -22,6 +23,7 @@
 
             return {
                 monthData: computed(() => store.state.monthData),
+                errorCode: computed(() => store.state.errorCode),
             }
         },
         components:{

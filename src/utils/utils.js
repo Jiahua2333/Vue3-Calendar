@@ -39,8 +39,25 @@ function formatChsDate(date, field){
     }
 }
 
+function formatUserDate(date){
+    switch(date.length){
+        case 8:
+            let year = date.substring(0,4);
+            let month = Number(date.substring(4,6));
+            let day = Number(date.substring(6,8));
+            return `${year}-${month}-${day}`;
+        case 6:
+            let year2 = date.substring(0,4);
+            let month2 = Number(date.substring(4,6));
+            return `${year2}-${month2}`;
+        default:
+            return date;
+    }
+}
+
 export {
     getIconDate,
     getCurDate,
     formatChsDate,
+    formatUserDate,
 }

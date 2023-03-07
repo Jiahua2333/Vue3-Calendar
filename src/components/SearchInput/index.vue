@@ -1,15 +1,45 @@
 <template>
     <div class="search">
-        <input type="text" :placeholder="placeholder" :maxlength="maxLength">
+        <input type="text" :placeholder="placeholder" :maxlength="maxLength" v-model="keyword" @input="search()">
     </div>
 </template>
 
 <script>
+import getData from "@/services";
+import { ref, watch } from "vue";
+import { useStore } from "vuex";
+import { formatUserDate } from "@/utils/utils"
 export default{
     props:{
         placeholder:String,
         maxLength:String,
-    }
+    },
+    
+    setup(){
+        const keyword = ref("");
+        const store = useStore();
+        const search = () => {
+            const field = store.state.field;
+            // console.log(111);
+            if(keyword.value.length === Number(store.state.maxLength)){
+                // console.log(222);
+                getData(store,field,formatUserDate(keyword.value))
+            }
+        };
+
+        watch(
+            () => store.state.field,
+            () => {
+                keyword.value = "";
+            }
+        );
+
+        return {
+            keyword,
+            search,
+        };
+    },
+
 }
 </script>
 

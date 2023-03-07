@@ -16,6 +16,9 @@ const getData = async (store, field, date) => {
     }
     // console.log(data);
 
+    store.commit("setErrorCode", data.error_code);
+    if(data.error_code) return;
+
     let res = null;
     switch(field){
         case 'day':
@@ -31,11 +34,14 @@ const getData = async (store, field, date) => {
             // console.log(res);
             break;
         case 'year':
+            res = data.result.data.holiday_list;
+            for(let item of res){
+                item.startday = formatChsDate(item.startday,'day')
+            }
             break;
     }
 
-    store.commit("setErrorCode", data.error_code);
-    if(data.error_code) return;
+
     store.commit("setData", {
         field,
         data: res,
